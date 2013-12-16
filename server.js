@@ -10,7 +10,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.favicon())
 app.use(express.bodyParser())
 app.use(express.methodOverride())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public/app')))
 
 app.get('/users', function(req, res) {
 	User.all().success(function(users) {
