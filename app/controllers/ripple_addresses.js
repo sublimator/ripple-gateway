@@ -4,13 +4,20 @@ module.exports = (function(){
   function create(req, res) {
     req.validate('user_id', 'isInt');
     req.validate('ripple_address', 'isAlpha');
-		req.validate('cash_amount', 'isFloat');
+    // What are we actually doing with cash_amount
+    // other than validating it?
+    req.validate('cash_amount', 'isFloat');
 
+    // Are we sure code from here on isn't executed if  
+    // any of the above are invalid?
     if (req.user.admin || (req.user.id == req.body.user_id)) {
       RippleAddress.create({
-        user_id: req.body.userId,
-        address: req.body.rippleAddress
+      	// camel hump scores, under says zzzzzz
+        user_id: req.body.user_id,
+        // address zeez problems, b4 they gets yee 
+        address: req.body.ripple_address
       }).complete(function(err, address){
+      	if (err) { /* whatevz, zzzzzz */ }
         res.send({ ripple_address: address });
       });
     } else {
